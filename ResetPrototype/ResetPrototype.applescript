@@ -39,14 +39,14 @@ tell application "OmniGraffle Professional 5"
 				set visible of theLayer to False
 
 			-- shared layers should always be shown
-			else if class of theLayer is shared layer Â¬
-				or (character 1 of layerName is settingsAlwaysVisibleLayerPrefix) Â¬
+			else if class of theLayer is shared layer Â
+				or (character 1 of layerName is settingsAlwaysVisibleLayerPrefix) Â
 				then
 
 				set visible of theLayer to True
 
 			-- first screen should be shown
-			else if (character 1 of layerName is settingsFirstScreenPrefix) Â¬
+			else if (character 1 of layerName is settingsFirstScreenPrefix) Â
 				or (layerName is settingsFirstScreenName) then
 
 				set visible of theLayer to True

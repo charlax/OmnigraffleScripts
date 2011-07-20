@@ -28,7 +28,7 @@ Activate the script menu
 Install the script
 ------------------
 
-1. Move the script file to `~/Library/Scripts/Applications/OmniGraffle Pro/`
+1. Move the `ResetPrototype.scpt` file (not `ResetPrototype.applescript`) to `~/Library/Scripts/Applications/OmniGraffle Pro/`
 2. You should not have to restart Omnigraffle. The script menu should appear in the right of your menu bar.
 
 This page gives you more information: [http://www.petermcm.dircon.co.uk/software/og_script_install.html](http://www.petermcm.dircon.co.uk/software/og_script_install.html)
