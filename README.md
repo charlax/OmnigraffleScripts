@@ -4,6 +4,8 @@ Description
 Scripts to increase your productivity with Omnigraffle.
 
 * ExportAllLayers: exports all layers in all canvases to an image file
+* ExportForiPad: exports all layers in all canvases to an image file
+  sized for an iPad (1024x768)
 * ExportAllFiles: exports all the opened files as a PDF
 * ResetPrototype: shows some layers, hides others to set the prototype to its blank state
 
@@ -51,10 +53,19 @@ ExportAllLayers
 
 **This script exports all the layers in all the canvases as an image.**
 
-1. Preparation: shows all shared layers (to share elements among canvases) and all layers beginning with a start “*” (to share elements among layers on the same canvas), hides all other layers.
+1. Preparation: shows all shared layers (to share elements among canvases) and all layers beginning with a star "*" (to share elements among layers on the same canvas), hides all other layers.
 2. Show layers one by one and export as an image file (PNG by default)
 
 You can try with ResetPrototype's example file (they follow the same principles).
+
+ExportForiPad
+=============
+
+**This script does the same as ExportAllLayers, but instead of exporting
+the full canvas, it crops it to fit the iPad.**
+
+To change the cropping region, you can modify `CANVAS_SIZE` and
+`CANVAS_ORIGIN` in the Applescript file.
 
 ResetPrototype
 ==============

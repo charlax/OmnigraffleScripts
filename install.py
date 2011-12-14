@@ -9,9 +9,10 @@ Copyright (c) 2011 Charles-Axel Dein. All rights reserved.
 
 import shutil
 import os
+import logging
 
 INSTALL_DIRECTORY = "~/Library/Scripts/Applications/Omnigraffle Pro/"
-SCRIPTS = ("ExportAllFiles", "ExportAllLayers", "ResetPrototype")
+SCRIPTS = ("ExportAllFiles", "ExportAllLayers", "ResetPrototype", "ExportForiPad")
 
 def main():
     install_directory = os.path.expanduser(INSTALL_DIRECTORY)
@@ -25,13 +26,17 @@ def main():
         scpt_filename = os.path.join(s, s + ".scpt")
         
         print "Compiling %s" % (scpt_filename)
-        os.system("osacompile -o %s %s" % 
+        os.system('osacompile -o "%s" "%s"' % 
             (scpt_filename, applescript_filename))
         
-        print "Copying %s to %s" % (scpt_filename, install_directory)
+        print "Installing %s" % scpt_filename
         shutil.copy(scpt_filename, install_directory)
-        
-        print "Deleting %s" % applescript_filename
+        logging.debug("Copied %s to %s" % (scpt_filename, install_directory))
+
+    print "Cleaning up..."
+    for s in SCRIPTS:
+        scpt_filename = os.path.join(s, s + ".scpt")
+        logging.debug("Deleting %s" % applescript_filename)
         os.remove(scpt_filename)
     
     print "\nInstallation finished."
