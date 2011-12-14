@@ -9,6 +9,8 @@ tell application "OmniGraffle Professional 5"
 	set theWindow to front window
 	set theDocument to document of theWindow
 	set theFilename to name of theDocument
+    -- remove .graffle
+    set theFilename to text 1 thru ((offset of "." in theFilename) - 1) of theFilename
 	
 	set export_folder to (choose folder with prompt "Pick the destination folder") as string
 	set export_folder to export_folder & theFilename & ":"
@@ -43,6 +45,10 @@ tell application "OmniGraffle Professional 5"
 			
 		end repeat
 		
+		set area type of current export settings to current canvas
+        set draws background of current export settings to false
+        set include border of current export settings to false
+
 		repeat with layerNumber from 1 to layerCount
 			set theLayer to layer layerNumber of theCanvas
 			
@@ -54,7 +60,6 @@ tell application "OmniGraffle Professional 5"
 				-- show the layer, export, then hide the layer
 				if character 1 of layer_name is not "*" then
 					set visible of theLayer to true
-					set area type of current export settings to current canvas
 					save theDocument in export_filename
 					set visible of theLayer to false
 				end if
