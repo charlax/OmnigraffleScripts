@@ -4,7 +4,7 @@
 -- Settings
 property exportFileExtension : "png"
 property CANVAS_ORIGIN = {200, 220}
-property CANVAS_SIZE = {1024, 768}
+property CANVAS_SIZE = {1024, 748} -- this is landscape orientation
 -- End of Settings
 
 tell application "OmniGraffle Professional 5"
