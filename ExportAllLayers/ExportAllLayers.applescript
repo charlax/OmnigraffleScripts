@@ -5,6 +5,15 @@
 property exportFileExtension : "png"
 -- End of Settings
 
+on file_exists(FileOrFolderToCheckString)
+   try
+       alias FileOrFolderToCheckString
+       return true
+   on error
+       return false
+   end try
+end file_exists
+
 tell application "OmniGraffle Professional 5"
 	set theWindow to front window
 	set theDocument to document of theWindow
@@ -16,8 +25,23 @@ tell application "OmniGraffle Professional 5"
 	set export_folder to export_folder & theFilename & ":"
 	
 	-- create folder
-	do shell script "mkdir -p " & quoted form of POSIX path of export_folder
-	
+	if file_exists(export_folder) of me then
+		try
+			display alert "The file already exists. Do you want to replace it?" buttons {"Cancel", "Erase"} cancel button 1
+		on error errText number errNum
+			if (errNum is equal to -128) then
+				return
+			end if
+		end try
+
+		-- deletes the folder (necessary because some layers may have been renamed
+		do shell script "rm -rf " & quoted form of POSIX path of export_folder
+
+	else
+		-- creates the folder
+		do shell script "mkdir -p " & quoted form of POSIX path of export_folder
+	end if
+
 	set canvasCount to count of canvases of theDocument
 	
 	set i to 0
