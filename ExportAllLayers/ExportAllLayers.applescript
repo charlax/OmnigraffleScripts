@@ -3,6 +3,7 @@
 
 -- Settings
 property exportFileExtension : "png"
+property ADD_CANVAS_NUMBER : true
 -- End of Settings
 
 on file_exists(FileOrFolderToCheckString)
@@ -73,12 +74,18 @@ tell application "OmniGraffle Professional 5"
         set draws background of current export settings to false
         set include border of current export settings to false
 
+		set filename to ""
+		if ADD_CANVAS_NUMBER then
+			set filename to canvasNumber & "- "
+		end if
+		set filename to filename & canvas_name
+
 		repeat with layerNumber from 1 to layerCount
 			set theLayer to layer layerNumber of theCanvas
 			
 			if (theLayer is prints) and (class of theLayer is not shared layer) then
 				set layer_name to name of theLayer as string
-				set filename to canvas_name & " - " & layer_name & "." & exportFileExtension
+				set filename to filename & " - " & layer_name & "." & exportFileExtension
 				set export_filename to export_folder & filename
 				
 				-- show the layer, export, then hide the layer
